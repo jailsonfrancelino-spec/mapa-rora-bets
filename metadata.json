@@ -1,0 +1,8 @@
+{
+  "name": "RouteMaster Pro",
+  "description": "Enterprise route tracking and area coverage optimizer with AI-powered location discovery and voice feedback.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone"
+  ]
+}
