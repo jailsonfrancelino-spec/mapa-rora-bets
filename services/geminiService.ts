@@ -6,45 +6,35 @@ const API_KEY = process.env.API_KEY || '';
 export const getGeminiAI = () => new GoogleGenAI({ apiKey: API_KEY });
 
 /**
- * Uses Gemini 2.5 Flash with Google Maps Tool to find business points nearby.
+ * Uses Gemini 3 Flash for fast business discovery.
  */
 export async function fetchNearbyBusinesses(lat: number, lng: number, query: string) {
   const ai = getGeminiAI();
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: `Find the most prominent ${query} near coordinates ${lat}, ${lng}. 
-      Return the names, specific addresses, and approximate lat/lng if possible.`,
+      model: "gemini-3-flash-preview",
+      contents: `Find ${query} near ${lat}, ${lng}. Return JSON list: [{"name": "X", "address": "X", "lat": v, "lng": v}]`,
       config: {
-        tools: [{ googleMaps: {} }],
-        toolConfig: {
-          retrievalConfig: {
-            latLng: {
-              latitude: lat,
-              longitude: lng
-            }
-          }
-        }
+        responseMimeType: "application/json"
       },
     });
 
-    // The model returns structured data or text grounding
     return response;
   } catch (error) {
-    console.error("Error fetching Maps data:", error);
+    console.error("Error fetching data:", error);
     return null;
   }
 }
 
 /**
- * Uses Gemini 2.5 Flash TTS to announce status updates.
+ * Uses Gemini TTS for fast professional audio announcements.
  */
 export async function speakStatus(text: string) {
   const ai = getGeminiAI();
   try {
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-preview-tts",
-      contents: [{ parts: [{ text: `Diga de forma profissional: ${text}` }] }],
+      contents: [{ parts: [{ text: `Diga: ${text}` }] }],
       config: {
         responseModalities: [Modality.AUDIO],
         speechConfig: {

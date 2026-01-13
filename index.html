@@ -3,26 +3,47 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RouteMaster Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Rotas Bets Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --blue-waze: #3b82f6;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
         .leaflet-container {
             width: 100%;
             height: 100%;
-            background: #0f172a;
+            background: #f8f9fb;
         }
-        /* Custom scrollbar */
+        .leaflet-control-zoom, .leaflet-control-attribution {
+            display: none !important;
+        }
+        /* Navigation Line Style - Continuous as requested */
+        .navigation-active-line {
+            stroke-dasharray: none !important;
+        }
+        /* Smooth Scale In */
+        .scale-102 {
+            transform: scale(1.02);
+        }
+        /* Custom Shadows */
+        .shadow-3xl {
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+        }
+        /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 0px;
         }
-        ::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #475569;
-            border-radius: 10px;
+        .custom-div-icon {
+            background: none !important;
+            border: none !important;
         }
     </style>
 <script type="importmap">
@@ -39,7 +60,7 @@
 }
 </script>
 </head>
-<body class="bg-slate-900 text-slate-100 overflow-hidden">
+<body class="bg-[#f8f9fb] text-slate-800 overflow-hidden select-none">
     <div id="root"></div>
 </body>
 </html>
